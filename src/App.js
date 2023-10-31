@@ -1,5 +1,4 @@
-import { DragDropContext, Draggable, Droppable } from 'react-beautiful-dnd';
-import { useState } from 'react';
+import React from 'react';
 import './App.css';
 import { Header } from './components/Header';
 import { TaskCards } from './components/task/TaskCards';
