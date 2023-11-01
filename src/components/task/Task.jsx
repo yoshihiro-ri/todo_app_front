@@ -1,10 +1,12 @@
 import React from 'react';
 import { Draggable } from 'react-beautiful-dnd';
+import useTestTaskStore from '../../store/todoStore';
+export const Task = ({ task, index }) => {
+    const { deleteTestTask } = useTestTaskStore((state) => ({
+        testTaskList: state.testTaskList,
+        deleteTestTask: state.deleteTestTask,
+    }));
 
-export const Task = ({ task, taskList, setTaskList, index }) => {
-    const handleDelete = (id) => {
-        setTaskList(taskList.filter((task) => task.id !== id));
-    };
     return (
         <Draggable index={index} draggableId={task.draggableId}>
             {(provided) => (
@@ -18,9 +20,9 @@ export const Task = ({ task, taskList, setTaskList, index }) => {
                     <p className="taskText">{task.text}</p>
                     <button
                         className="taskTrashButton"
-                        onClick={() => handleDelete(task.id)}
+                        onClick={() => deleteTestTask(task.id)}
                     >
-                        <i class="fa-regular fa-trash-can"></i>
+                        <i>🚮</i>
                     </button>
                 </div>
             )}

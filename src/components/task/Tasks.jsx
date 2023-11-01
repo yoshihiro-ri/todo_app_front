@@ -1,15 +1,18 @@
 import React from 'react';
 import { Task } from './Task.jsx';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-export const Tasks = ({ taskList, setTaskList }) => {
+import useTestTaskStore from '../../store/todoStore.js';
+export const Tasks = () => {
+    const { testTasksList } = useTestTaskStore();
+    const { reorderTestTask } = useTestTaskStore((state) => ({
+        reorderTestTask: state.reorderTestTask,
+    }));
     const handleDragEnd = (result) => {
-        const reorder = (taskList, startIndex, endIndex) => {
-            const remove = taskList.splice(startIndex, 1);
-            taskList.splice(endIndex, 0, remove[0]);
-        };
-        reorder(taskList, result.source.index, result.destination.index);
-
-        setTaskList(taskList);
+        reorderTestTask(
+            testTasksList,
+            result.source.index,
+            result.destination.index
+        );
     };
     return (
         <div>
@@ -20,14 +23,9 @@ export const Tasks = ({ taskList, setTaskList }) => {
                             {...provided.droppableProps}
                             ref={provided.innerRef}
                         >
-                            {taskList.map((task, index) => (
+                            {testTasksList.map((task, index) => (
                                 <div key={task.id}>
-                                    <Task
-                                        index={index}
-                                        task={task}
-                                        taskList={taskList}
-                                        setTaskList={setTaskList}
-                                    />
+                                    <Task index={index} task={task} />
                                 </div>
                             ))}
                             {provided.placeholder}

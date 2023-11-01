@@ -21,17 +21,15 @@ export const TaskCard = ({ id, taskCardsList, setTaskCardsList, index }) => {
                 >
                     <div className="taskCardTitleAndTaskCardDeleteButtonArea">
                         <TaskCardTitle />
-                        <TaskCardDeleteButton
+                        {/* <TaskCardDeleteButton
                             id={id}
                             taskCardsList={taskCardsList}
                             setTaskCardsList={setTaskCardsList}
-                        />
+                        /> */}
                     </div>
                     <TaskAddInput
                         inputText={inputText}
                         setInputText={setInputText}
-                        setTaskList={setTaskList}
-                        taskList={taskList}
                     />
                     <Tasks
                         inputText={inputText}
