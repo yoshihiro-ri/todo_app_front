@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-export default function TaskCardTitle() {
+export const TaskCardTitle = () => {
     const [isClick, setIsClick] = useState(false);
     const [inputCardTitle, setInputCardTitle] = useState('Today');
 
@@ -36,4 +36,4 @@ export default function TaskCardTitle() {
             )}
         </div>
     );
-}
+};

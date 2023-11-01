@@ -1,17 +1,23 @@
 import React from 'react';
 import { useState } from 'react';
-import TaskCardTitle from './TaskCardTitle';
-import TaskCardDeleteButton from './button/TaskCardDeleteButton';
+import { TaskCardTitle } from './TaskCardTitle';
+import { TaskCardDeleteButton } from './button/TaskCardDeleteButton';
 import { TaskAddInput } from './input/TaskAddInput';
 import { Tasks } from './Tasks';
 
-export default function TaskCard() {
+export const TaskCard = ({ id, taskCardsList, setTaskCardsList }) => {
     const [inputText, setInputText] = useState('');
     const [taskList, setTaskList] = useState([]);
     return (
         <div className="taskCard">
-            <TaskCardTitle />
-            <TaskCardDeleteButton />
+            <div className="taskCardTitleAndTaskCardDeleteButtonArea">
+                <TaskCardTitle />
+                <TaskCardDeleteButton
+                    id={id}
+                    taskCardsList={taskCardsList}
+                    setTaskCardsList={setTaskCardsList}
+                />
+            </div>
             <TaskAddInput
                 inputText={inputText}
                 setInputText={setInputText}
@@ -25,4 +31,4 @@ export default function TaskCard() {
             />
         </div>
     );
-}
+};
