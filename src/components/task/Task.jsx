@@ -20,7 +20,7 @@ export const Task = ({ task, taskList, setTaskList, index }) => {
                         className="taskTrashButton"
                         onClick={() => handleDelete(task.id)}
                     >
-                        <i class="fa-regular fa-trash-can"></i>
+                        {/* <i class="fa-regular fa-trash-can"></i> */}
                     </button>
                 </div>
             )}
