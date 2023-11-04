@@ -1,14 +1,25 @@
 import React from 'react';
 import { useState } from 'react';
-export const TaskCardTitle = () => {
+export const TaskCardTitle = ({
+    id,
+    title,
+    taskCardsList,
+    setTaskCardsList,
+}) => {
     const [isClick, setIsClick] = useState(false);
-    const [inputCardTitle, setInputCardTitle] = useState('Today');
 
     const handleClick = () => {
         setIsClick(true);
     };
     const handleChange = (e) => {
-        setInputCardTitle(e.target.value);
+        const newTitle = e.target.value;
+        const newTaskCardsList = taskCardsList.map((taskCard) => {
+            if (taskCard.id === id) {
+                return { ...taskCard, title: newTitle };
+            }
+            return taskCard;
+        });
+        setTaskCardsList(newTaskCardsList);
     };
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -27,12 +38,12 @@ export const TaskCardTitle = () => {
                         type="text"
                         onChange={handleChange}
                         onBlur={handleBlur}
-                        value={inputCardTitle}
+                        value={title}
                         maxLength={15}
                     ></input>
                 </form>
             ) : (
-                <h3>{inputCardTitle}</h3>
+                <h3>{title}</h3>
             )}
         </div>
     );

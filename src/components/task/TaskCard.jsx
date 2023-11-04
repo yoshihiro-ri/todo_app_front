@@ -6,7 +6,13 @@ import { TaskAddInput } from './input/TaskAddInput';
 import { Tasks } from './Tasks';
 import { Draggable } from 'react-beautiful-dnd';
 
-export const TaskCard = ({ id, taskCardsList, setTaskCardsList, index }) => {
+export const TaskCard = ({
+    id,
+    taskCardsList,
+    setTaskCardsList,
+    index,
+    title,
+}) => {
     const [inputText, setInputText] = useState('');
     const [taskList, setTaskList] = useState([]);
     return (
@@ -20,7 +26,12 @@ export const TaskCard = ({ id, taskCardsList, setTaskCardsList, index }) => {
                     {...provided.dragHandleProps}
                 >
                     <div className="taskCardTitleAndTaskCardDeleteButtonArea">
-                        <TaskCardTitle />
+                        <TaskCardTitle
+                            id={id}
+                            taskCardsList={taskCardsList}
+                            setTaskCardsList={setTaskCardsList}
+                            title={title}
+                        />
                         <TaskCardDeleteButton
                             id={id}
                             taskCardsList={taskCardsList}
@@ -28,12 +39,14 @@ export const TaskCard = ({ id, taskCardsList, setTaskCardsList, index }) => {
                         />
                     </div>
                     <TaskAddInput
+                        id={id}
                         inputText={inputText}
                         setInputText={setInputText}
                         setTaskList={setTaskList}
                         taskList={taskList}
                     />
                     <Tasks
+                        id={id}
                         inputText={inputText}
                         taskList={taskList}
                         setTaskList={setTaskList}

@@ -2,13 +2,14 @@ import React from 'react';
 import { TaskCard } from './TaskCard';
 import { AddTaskCardButton } from './button/AddTaskCardButton';
 import { useState, useEffect } from 'react';
-
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
+
 export const TaskCards = () => {
     const [taskCardsList, setTaskCardsList] = useState([
         {
-            id: 0,
+            id: 'unset',
             draggableId: 'item0',
+            title: 'untitled',
         },
     ]);
     const handleDragEnd = (result) => {
@@ -21,16 +22,16 @@ export const TaskCards = () => {
         reorder(taskCardsList, result.source.index, result.destination.index);
     };
 
-    const handleArrayChange = () => {
-        console.log('配列が変更されました:', taskCardsList);
+    const handleTaskCardsListChange = () => {
+        console.log('TaskCardsListが変更されました:', taskCardsList);
     };
     useEffect(() => {
-        handleArrayChange();
+        handleTaskCardsListChange();
     }, [taskCardsList]);
 
     return (
         <DragDropContext onDragEnd={handleDragEnd}>
-            <Droppable droppableId="droppable" direction="horizontal">
+            <Droppable droppableId="droppableId" direction="horizontal">
                 {(provided) => (
                     <div
                         className="taskCardsArea"
@@ -44,6 +45,7 @@ export const TaskCards = () => {
                                 taskCardsList={taskCardsList}
                                 setTaskCardsList={setTaskCardsList}
                                 index={index}
+                                title={taskCardList.title}
                             />
                         ))}
                         <AddTaskCardButton

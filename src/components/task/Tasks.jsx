@@ -1,7 +1,9 @@
 import React from 'react';
+import { useEffect } from 'react';
 import { Task } from './Task.jsx';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-export const Tasks = ({ taskList, setTaskList }) => {
+
+export const Tasks = ({ id, taskList, setTaskList }) => {
     const handleDragEnd = (result) => {
         const reorder = (taskList, startIndex, endIndex) => {
             const remove = taskList.splice(startIndex, 1);
@@ -11,10 +13,17 @@ export const Tasks = ({ taskList, setTaskList }) => {
 
         setTaskList(taskList);
     };
+
+    const handleTaskListChange = () => {
+        console.log('TaskListが変更されました:', taskList);
+    };
+    useEffect(() => {
+        handleTaskListChange();
+    }, [taskList]);
     return (
         <div>
             <DragDropContext onDragEnd={handleDragEnd}>
-                <Droppable droppableId="droppable">
+                <Droppable droppableId={id}>
                     {(provided) => (
                         <div
                             {...provided.droppableProps}

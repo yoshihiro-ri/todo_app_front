@@ -1,6 +1,7 @@
 import React from 'react';
 import { v4 as uuid } from 'uuid';
 export const TaskAddInput = ({
+    id,
     inputText,
     setInputText,
     setTaskList,
@@ -15,9 +16,10 @@ export const TaskAddInput = ({
         setTaskList([
             ...taskList,
             {
-                id: taskId,
+                taskId: taskId,
                 draggableId: `task-${taskId}`,
                 text: inputText,
+                cardId: id,
             },
         ]);
         setInputText('');
