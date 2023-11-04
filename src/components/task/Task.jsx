@@ -6,7 +6,11 @@ export const Task = ({ task, taskList, setTaskList, index }) => {
         setTaskList(taskList.filter((task) => task.id !== id));
     };
     return (
-        <Draggable index={index} draggableId={task.draggableId}>
+        <Draggable
+            key={task.draggableId}
+            index={index}
+            draggableId={task.draggableId}
+        >
             {(provided) => (
                 <div
                     className="taskBox"
@@ -19,9 +23,7 @@ export const Task = ({ task, taskList, setTaskList, index }) => {
                     <button
                         className="taskTrashButton"
                         onClick={() => handleDelete(task.id)}
-                    >
-                        <i class="fa-regular fa-trash-can"></i>
-                    </button>
+                    ></button>
                 </div>
             )}
         </Draggable>

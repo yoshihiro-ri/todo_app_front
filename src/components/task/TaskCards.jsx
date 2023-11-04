@@ -1,28 +1,37 @@
 import React from 'react';
 import { TaskCard } from './TaskCard';
 import { AddTaskCardButton } from './button/AddTaskCardButton';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 
 export const TaskCards = () => {
     const [taskCardsList, setTaskCardsList] = useState([
         {
-            id: 0,
+            id: 'unset',
             draggableId: 'item0',
+            title: 'untitled',
         },
     ]);
     const handleDragEnd = (result) => {
-        const reorder = (taskList, startIndex, endIndex) => {
-            const remove = taskList.splice(startIndex, 1);
-            taskList.splice(endIndex, 0, remove[0]);
+        const reorder = (taskCardsList, startIndex, endIndex) => {
+            const newArray = [...taskCardsList];
+            const remove = newArray.splice(startIndex, 1);
+            newArray.splice(endIndex, 0, remove[0]);
+            setTaskCardsList(newArray);
         };
         reorder(taskCardsList, result.source.index, result.destination.index);
-
-        setTaskCardsList(taskCardsList);
     };
+
+    const handleTaskCardsListChange = () => {
+        console.log('TaskCardsListが変更されました:', taskCardsList);
+    };
+    useEffect(() => {
+        handleTaskCardsListChange();
+    }, [taskCardsList]);
+
     return (
         <DragDropContext onDragEnd={handleDragEnd}>
-            <Droppable droppableId="droppable" direction="horizontal">
+            <Droppable droppableId="droppableId" direction="horizontal">
                 {(provided) => (
                     <div
                         className="taskCardsArea"
@@ -36,6 +45,7 @@ export const TaskCards = () => {
                                 taskCardsList={taskCardsList}
                                 setTaskCardsList={setTaskCardsList}
                                 index={index}
+                                title={taskCardList.title}
                             />
                         ))}
                         <AddTaskCardButton
