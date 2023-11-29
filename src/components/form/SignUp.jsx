@@ -21,14 +21,10 @@ const SignUp = () => {
             });
 
             if (response.ok) {
-                // Handle successful response
                 console.log(response);
             } else {
-                // Handle error response
             }
-        } catch (error) {
-            // Handle network error
-        }
+        } catch (error) {}
     };
 
     return (

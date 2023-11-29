@@ -25,14 +25,11 @@ const LogIn = () => {
                 const responseData = await response.json();
                 console.log(responseData);
                 if (responseData.result === true) {
-                    // navigate('/');
+                    navigate('/home');
                 }
             } else {
-                // Handle error response
             }
-        } catch (error) {
-            // Handle network error
-        }
+        } catch (error) {}
     };
 
     return (

@@ -29,9 +29,9 @@ h1 {
 
 header {
   text-align: center;
-  padding: 4px 10%;
-  margin-bottom: 50px;
-  background-color: rgb(102, 94, 74);
+  padding: 10px 10%;
+  display: flex;
+  justify-content: space-between;
 }
 
 .app {
