@@ -28,7 +28,7 @@ export const AddTaskCardButton = ({ taskCardsList, setTaskCardsList }) => {
         setTaskCardsList([
             ...taskCardsList,
             {
-                id: taskCardId,
+                card_id: taskCardId,
                 draggableId: `item${taskCardId}`,
                 title: title,
             },

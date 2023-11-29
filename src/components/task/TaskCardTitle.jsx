@@ -3,7 +3,7 @@ import { useState } from 'react';
 import axios from 'axios';
 
 export const TaskCardTitle = ({
-    id,
+    card_id,
     title,
     taskCardsList,
     setTaskCardsList,
@@ -16,14 +16,14 @@ export const TaskCardTitle = ({
     const handleChange = async (e) => {
         const newTitle = e.target.value;
         const newTaskCardsList = taskCardsList.map((taskCard) => {
-            if (taskCard.id === id) {
+            if (taskCard.card_id === card_id) {
                 return { ...taskCard, title: newTitle };
             }
             return taskCard;
         });
         setTaskCardsList(newTaskCardsList);
 
-        const url = `http://127.0.0.1:5000/task_card/${id}`;
+        const url = `http://127.0.0.1:5000/task_card/${card_id}`;
         const data = {
             title: newTitle,
         };

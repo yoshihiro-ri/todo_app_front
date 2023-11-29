@@ -2,12 +2,12 @@ import React from 'react';
 import axios from 'axios';
 
 export const TaskCardDeleteButton = ({
-    id,
+    card_id,
     taskCardsList,
     setTaskCardsList,
 }) => {
-    const deleteTaskCard = async (id) => {
-        const url = `http://127.0.0.1:5000/task_card/${id}`;
+    const deleteTaskCard = async (card_id) => {
+        const url = `http://127.0.0.1:5000/task_card/${card_id}`;
 
         try {
             const response = await axios.delete(url, { withCredentials: true });
@@ -16,18 +16,18 @@ export const TaskCardDeleteButton = ({
             console.error(`Error in deleteTaskCard: ${error}`);
         }
     };
-    const deleteTaskCardButton = async (id) => {
-        await deleteTaskCard(id);
+    const deleteTaskCardButton = async (card_id) => {
+        await deleteTaskCard(card_id);
 
         setTaskCardsList(
-            taskCardsList.filter((taskCard) => taskCard.id !== id)
+            taskCardsList.filter((taskCard) => taskCard.card_id !== card_id)
         );
     };
 
     return (
         <button
             className="taskCardDeleteButton"
-            onClick={() => deleteTaskCardButton(id)}
+            onClick={() => deleteTaskCardButton(card_id)}
         >
             ✖️
         </button>

@@ -13,40 +13,41 @@ export const TaskCard = ({
     index,
     title,
 }) => {
+    const card_id = taskCardsList[index].card_id;
     const [inputText, setInputText] = useState('');
     const [taskList, setTaskList] = useState([]);
     return (
-        <Draggable index={index} draggableId={taskCardsList[index].draggableId}>
+        <Draggable index={index} draggableId={String(card_id)}>
             {(provided) => (
                 <div
                     className="taskCard"
-                    key={index}
+                    key={card_id}
                     ref={provided.innerRef}
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                 >
                     <div className="taskCardTitleAndTaskCardDeleteButtonArea">
                         <TaskCardTitle
-                            id={id}
+                            card_id={card_id}
                             taskCardsList={taskCardsList}
                             setTaskCardsList={setTaskCardsList}
                             title={title}
                         />
                         <TaskCardDeleteButton
-                            id={id}
+                            card_id={card_id}
                             taskCardsList={taskCardsList}
                             setTaskCardsList={setTaskCardsList}
                         />
                     </div>
                     <TaskAddInput
-                        id={id}
+                        id={card_id}
                         inputText={inputText}
                         setInputText={setInputText}
                         setTaskList={setTaskList}
                         taskList={taskList}
                     />
                     <Tasks
-                        id={id}
+                        id={card_id}
                         inputText={inputText}
                         taskList={taskList}
                         setTaskList={setTaskList}
