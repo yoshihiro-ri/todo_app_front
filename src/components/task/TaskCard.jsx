@@ -1,10 +1,11 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { TaskCardTitle } from './TaskCardTitle';
 import { DeleteTaskCardButton } from './button/DeleteTaskCardButton';
-import { TaskAddInput } from './input/TaskAddInput';
+import { AddTaskInput } from './input/AddTaskInput';
 import { Tasks } from './Tasks';
 import { Draggable } from 'react-beautiful-dnd';
+import axios from 'axios';
 
 export const TaskCard = ({
     id,
@@ -16,6 +17,24 @@ export const TaskCard = ({
     const card_id = taskCardsList[index].card_id;
     const [inputText, setInputText] = useState('');
     const [taskList, setTaskList] = useState([]);
+    const getTasks = async (cardId) => {
+        const url = `http://127.0.0.1:5000/task/${cardId}`;
+
+        try {
+            const response = await axios.get(url, { withCredentials: true });
+            return response.data;
+        } catch (error) {
+            console.error(`Error in getTasks: ${error}`);
+        }
+    };
+    useEffect(() => {
+        const fetchTasks = async () => {
+            const tasks = await getTasks(card_id);
+            setTaskList(tasks);
+        };
+
+        fetchTasks();
+    }, []);
     return (
         <Draggable index={index} draggableId={String(card_id)}>
             {(provided) => (
@@ -39,7 +58,7 @@ export const TaskCard = ({
                             setTaskCardsList={setTaskCardsList}
                         />
                     </div>
-                    <TaskAddInput
+                    <AddTaskInput
                         id={card_id}
                         inputText={inputText}
                         setInputText={setInputText}
