@@ -38,7 +38,7 @@ header {
   background: url(../src/images/background.jpeg)center center / cover no-repeat fixed;
   ;
   background-repeat: no-repeat;
-  height: 100vh;
+  min-height: 100vh;
   ;
 
 }
@@ -53,7 +53,6 @@ header {
 
 .taskCardTitleInputArea {
   margin-bottom: 10px;
-  width: 30%;
   cursor: pointer;
 }
 
@@ -106,6 +105,7 @@ header {
   justify-content: flex-start;
   align-items: flex-start;
   flex-wrap: wrap;
+  width: 260px
 }
 
 .addTaskCardButtonArea {

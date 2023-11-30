@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { TaskCardTitle } from './TaskCardTitle';
-import { TaskCardDeleteButton } from './button/TaskCardDeleteButton';
+import { DeleteTaskCardButton } from './button/DeleteTaskCardButton';
 import { TaskAddInput } from './input/TaskAddInput';
 import { Tasks } from './Tasks';
 import { Draggable } from 'react-beautiful-dnd';
@@ -33,7 +33,7 @@ export const TaskCard = ({
                             setTaskCardsList={setTaskCardsList}
                             title={title}
                         />
-                        <TaskCardDeleteButton
+                        <DeleteTaskCardButton
                             card_id={card_id}
                             taskCardsList={taskCardsList}
                             setTaskCardsList={setTaskCardsList}

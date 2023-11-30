@@ -29,7 +29,9 @@ const LogIn = () => {
                 }
             } else {
             }
-        } catch (error) {}
+        } catch (error) {
+            console.error('Error:', error);
+        }
     };
 
     return (
