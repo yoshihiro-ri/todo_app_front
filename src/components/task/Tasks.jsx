@@ -2,18 +2,34 @@ import React from 'react';
 import { useEffect } from 'react';
 import { Task } from './Task.jsx';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
-
+import axios from 'axios';
 export const Tasks = ({ id, taskList, setTaskList }) => {
     const handleDragEnd = (result) => {
-        const reorder = (taskList, startIndex, endIndex) => {
-            const remove = taskList.splice(startIndex, 1);
-            taskList.splice(endIndex, 0, remove[0]);
-        };
         reorder(taskList, result.source.index, result.destination.index);
-
-        setTaskList(taskList);
     };
+    const reorder = (taskList, startIndex, endIndex) => {
+        const remove = taskList.splice(startIndex, 1);
+        taskList.splice(endIndex, 0, remove[0]);
+        setTaskList(taskList);
+        for (let i = 0; i < taskList.length; i++) {
+            updateTaskCardIndex(taskList[i].task_id, i);
+        }
+    };
+    const updateTaskCardIndex = async (task_id, index) => {
+        const url = `http://127.0.0.1:5000/task/${task_id}`;
+        const data = {
+            order_index: index,
+        };
 
+        try {
+            const response = await axios.put(url, data, {
+                withCredentials: true,
+            });
+            return response.data;
+        } catch (error) {
+            console.error(`Error in updateTaskCardIndex: ${error}`);
+        }
+    };
     const handleTaskListChange = () => {
         console.log('TaskListが変更されました:', taskList);
     };

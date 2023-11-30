@@ -43,9 +43,11 @@ export const TaskCard = ({
                     key={card_id}
                     ref={provided.innerRef}
                     {...provided.draggableProps}
-                    {...provided.dragHandleProps}
                 >
-                    <div className="taskCardTitleAndTaskCardDeleteButtonArea">
+                    <div
+                        className="taskCardTitleAndTaskCardDeleteButtonArea"
+                        {...provided.dragHandleProps}
+                    >
                         <TaskCardTitle
                             card_id={card_id}
                             taskCardsList={taskCardsList}
