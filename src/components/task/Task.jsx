@@ -1,16 +1,25 @@
 import React from 'react';
 import { Draggable } from 'react-beautiful-dnd';
+import axios from 'axios';
 
 export const Task = ({ task, taskList, setTaskList, index }) => {
-    const handleDelete = (id) => {
-        setTaskList(taskList.filter((task) => task.id !== id));
+    const deleteTask = async (taskId) => {
+        const url = `${process.env.REACT_APP_API_URL}/task/${taskId}`;
+
+        try {
+            const response = await axios.delete(url, { withCredentials: true });
+            return response.data;
+        } catch (error) {
+            console.error(`Error in deleteTask: ${error}`);
+        }
     };
+    const handleDelete = async (id) => {
+        await deleteTask(id);
+        setTaskList(taskList.filter((task) => task.task_id !== id));
+    };
+
     return (
-        <Draggable
-            key={task.draggableId}
-            index={index}
-            draggableId={task.draggableId}
-        >
+        <Draggable key={task.task_id} index={index} draggableId={task.task_id}>
             {(provided) => (
                 <div
                     className="taskBox"
@@ -19,10 +28,10 @@ export const Task = ({ task, taskList, setTaskList, index }) => {
                     {...provided.draggableProps}
                     {...provided.dragHandleProps}
                 >
-                    <p className="taskText">{task.text}</p>
+                    <p className="taskText">{task.content}</p>
                     <button
                         className="taskTrashButton"
-                        onClick={() => handleDelete(task.id)}
+                        onClick={() => handleDelete(task.task_id)}
                     ></button>
                 </div>
             )}

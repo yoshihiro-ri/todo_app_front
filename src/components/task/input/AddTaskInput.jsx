@@ -1,24 +1,43 @@
 import React from 'react';
 import { v4 as uuid } from 'uuid';
-export const TaskAddInput = ({
+import axios from 'axios';
+
+export const AddTaskInput = ({
     id,
     inputText,
     setInputText,
     setTaskList,
     taskList,
 }) => {
-    const handleSubmit = (e) => {
-        const taskId = uuid();
+    const createTask = async (task_id, text, cardId) => {
+        const url = `${process.env.REACT_APP_API_URL}/task/`;
+        const data = {
+            task_id: task_id,
+            content: text,
+            task_card_id: cardId,
+        };
+
+        try {
+            const response = await axios.post(url, data, {
+                withCredentials: true,
+            });
+            return response.data;
+        } catch (error) {
+            console.error(`Error in createTask: ${error}`);
+        }
+    };
+    const handleSubmit = async (e) => {
+        const task_id = uuid();
         e.preventDefault();
         if (inputText === '') {
             return;
         }
+        await createTask(task_id, inputText, id);
         setTaskList([
             ...taskList,
             {
-                taskId: taskId,
-                draggableId: `task-${taskId}`,
-                text: inputText,
+                task_id: task_id,
+                content: inputText,
                 cardId: id,
             },
         ]);
