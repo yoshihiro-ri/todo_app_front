@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const LogIn = () => {
+const LogInForm = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -42,12 +42,12 @@ const LogIn = () => {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
             />
-            <input
+            {/* <input
                 type="email"
                 placeholder="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-            />
+            /> */}
             <input
                 type="password"
                 placeholder="password"
@@ -59,4 +59,4 @@ const LogIn = () => {
     );
 };
 
-export default LogIn;
+export default LogInForm;
