@@ -23,7 +23,7 @@ export const TaskCardTitle = ({
         });
         setTaskCardsList(newTaskCardsList);
 
-        const url = `http://127.0.0.1:5000/task_card/${card_id}`;
+        const url = `${process.env.REACT_APP_API_URL}/task_card/${card_id}`;
         const data = {
             title: newTitle,
         };

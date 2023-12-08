@@ -18,7 +18,7 @@ export const TaskCard = ({
     const [inputText, setInputText] = useState('');
     const [taskList, setTaskList] = useState([]);
     const getTasks = async (cardId) => {
-        const url = `http://127.0.0.1:5000/task/${cardId}`;
+        const url = `${process.env.REACT_APP_API_URL}/task/${cardId}`;
 
         try {
             const response = await axios.get(url, { withCredentials: true });

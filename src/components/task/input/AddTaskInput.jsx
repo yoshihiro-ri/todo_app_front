@@ -10,7 +10,7 @@ export const AddTaskInput = ({
     taskList,
 }) => {
     const createTask = async (task_id, text, cardId) => {
-        const url = 'http://127.0.0.1:5000/task/';
+        const url = `${process.env.REACT_APP_API_URL}/task/`;
         const data = {
             task_id: task_id,
             content: text,

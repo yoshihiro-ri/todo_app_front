@@ -11,14 +11,17 @@ const SignUpForm = () => {
         const data = { name, email, password };
 
         try {
-            const response = await fetch('http://127.0.0.1:5000/user', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                credentials: 'include',
-                body: JSON.stringify(data),
-            });
+            const response = await fetch(
+                `${process.env.REACT_APP_API_URL}/user`,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    credentials: 'include',
+                    body: JSON.stringify(data),
+                }
+            );
 
             if (response.ok) {
                 console.log(response);

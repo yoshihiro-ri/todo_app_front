@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export const AddTaskCardButton = ({ taskCardsList, setTaskCardsList }) => {
     const postTaskCard = async (title, taskCardId) => {
-        const url = 'http://127.0.0.1:5000/task_card/';
+        const url = `${process.env.REACT_APP_API_URL}/task_card/`;
         const data = {
             title: title,
             card_id: taskCardId,

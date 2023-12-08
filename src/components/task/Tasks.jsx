@@ -16,7 +16,7 @@ export const Tasks = ({ id, taskList, setTaskList }) => {
         }
     };
     const updateTaskCardIndex = async (task_id, index) => {
-        const url = `http://127.0.0.1:5000/task/${task_id}`;
+        const url = `${process.env.REACT_APP_API_URL}/task/${task_id}`;
         const data = {
             order_index: index,
         };

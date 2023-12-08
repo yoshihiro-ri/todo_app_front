@@ -4,7 +4,7 @@ import axios from 'axios';
 
 export const Task = ({ task, taskList, setTaskList, index }) => {
     const deleteTask = async (taskId) => {
-        const url = `http://127.0.0.1:5000/task/${taskId}`;
+        const url = `${process.env.REACT_APP_API_URL}/task/${taskId}`;
 
         try {
             const response = await axios.delete(url, { withCredentials: true });
