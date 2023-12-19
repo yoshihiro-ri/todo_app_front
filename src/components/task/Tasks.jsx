@@ -4,15 +4,16 @@ import { Task } from './Task.jsx';
 import { DragDropContext, Droppable } from 'react-beautiful-dnd';
 import axios from 'axios';
 export const Tasks = ({ id, taskList, setTaskList }) => {
-    const handleDragEnd = (result) => {
+    const handleDragEnd = async (result) => {
         reorder(taskList, result.source.index, result.destination.index);
     };
-    const reorder = (taskList, startIndex, endIndex) => {
-        const remove = taskList.splice(startIndex, 1);
-        taskList.splice(endIndex, 0, remove[0]);
-        setTaskList(taskList);
-        for (let i = 0; i < taskList.length; i++) {
-            updateTaskCardIndex(taskList[i].task_id, i);
+    const reorder = async (taskList, startIndex, endIndex) => {
+        const newArray = [...taskList];
+        const remove = newArray.splice(startIndex, 1);
+        newArray.splice(endIndex, 0, remove[0]);
+        setTaskList(newArray);
+        for (let i = 0; i < newArray.length; i++) {
+            await updateTaskCardIndex(newArray[i].task_id, i);
         }
     };
     const updateTaskCardIndex = async (task_id, index) => {
@@ -30,12 +31,12 @@ export const Tasks = ({ id, taskList, setTaskList }) => {
             console.error(`Error in updateTaskCardIndex: ${error}`);
         }
     };
-    const handleTaskListChange = () => {
-        console.log('TaskListが変更されました:', taskList);
-    };
-    useEffect(() => {
-        handleTaskListChange();
-    }, [taskList]);
+    // const handleTaskListChange = () => {
+    //     console.log('TaskListが変更されました:', taskList);
+    // };
+    // useEffect(() => {
+    //     handleTaskListChange();
+    // }, [taskList]);
     return (
         <div>
             <DragDropContext onDragEnd={handleDragEnd}>

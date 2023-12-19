@@ -8,7 +8,6 @@ export const TaskCards = () => {
     const [taskCardsList, setTaskCardsList] = useState([]);
     const handleDragEnd = async (result) => {
         reorder(taskCardsList, result.source.index, result.destination.index);
-        console.log(taskCardsList);
     };
     const reorder = async (taskCardsList, startIndex, endIndex) => {
         const newArray = [...taskCardsList];
@@ -34,9 +33,6 @@ export const TaskCards = () => {
             console.error(`Error in updateTaskCardIndex: ${error}`);
         }
     };
-    const handleTaskCardsListChange = () => {
-        console.log('TaskCardsListが変更されました:', taskCardsList);
-    };
 
     const getTaskCards = async () => {
         const url = `${process.env.REACT_APP_API_URL}/task_card`;
@@ -49,9 +45,12 @@ export const TaskCards = () => {
         }
     };
 
-    useEffect(() => {
-        handleTaskCardsListChange();
-    }, [taskCardsList]);
+    // const handleTaskCardsListChange = () => {
+    //     console.log('TaskCardsListが変更されました:', taskCardsList);
+    // };
+    // useEffect(() => {
+    //     handleTaskCardsListChange();
+    // }, [taskCardsList]);
 
     useEffect(() => {
         const fetchTaskCards = async () => {

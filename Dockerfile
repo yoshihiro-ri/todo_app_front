@@ -1,22 +1,17 @@
-# 使用するベースイメージを指定
+# Use an official Node runtime as a parent image
 FROM node:19
 
-# コンテナ内の作業ディレクトリを設定
-WORKDIR /todo_app_front/
+# Set the working directory in the container
+WORKDIR /app
 
-# ローカルのアプリケーションファイルをコンテナにコピー
-COPY todo_app_front/package.json ./
-COPY todo_app_front/package-lock.json ./
+# Copy the current directory contents into the container
+COPY . /app
+
+# Install any needed packages specified in package.json
 RUN npm install
 
-# アプリケーションのソースコードをコンテナにコピー
-COPY todo_app_front/public ./public/
-COPY todo_app_front/src ./src/
-
-COPY . .
-
-# アプリケーションのポートを公開
+# Make port 3000 available to the world outside this container
 EXPOSE 3000
 
-# アプリケーションを起動
+# Run npm start when the container launches
 CMD ["npm", "start"]
