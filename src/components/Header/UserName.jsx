@@ -7,7 +7,7 @@ function UserName() {
         const checkLogin = async () => {
             try {
                 const response = await fetch(
-                    'http://127.0.0.1:5000/check_login',
+                    `${process.env.REACT_APP_API_URL}/check_login`,
                     {
                         credentials: 'include',
                     }

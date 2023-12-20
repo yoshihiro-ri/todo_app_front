@@ -7,7 +7,7 @@ const LogoutButton = () => {
         window.location.href = '/login';
     };
 
-    return <button onClick={handleLogout}>ログアウト</button>;
+    return <button onClick={handleLogout}>Logout</button>;
 };
 
 export default LogoutButton;

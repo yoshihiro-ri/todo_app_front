@@ -38,12 +38,14 @@ const SignUpForm = () => {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
             />
+            <br></br>
             <input
                 type="email"
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
             />
+            <br></br>
             <input
                 type="password"
                 placeholder="Password"
